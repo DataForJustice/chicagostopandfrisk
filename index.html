@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+	<meta charset="UTF-8">
+	<title>Stop and Frisk in Chicago</title>
+	<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+	<script src="js/libs/jquery.min.js"></script>
+	<script src="js/libs/d3.v4.min.js"></script>
+	<script src="js/libs/d3-geo.v1.min.js"></script>
+	<script src="js/libs/d3-geo-projection.v1.min.js"></script>
+	<script src="js/libs/d3-selection-multi.v0.4.min.js"></script>
+	<script src="js/libs/d3-axis.v1.min.js"></script>
+	<script src="js/libs/topojson.js"></script>
+	<script src="js/libs/queue.min.js"></script>
+	<script src="js/libs/ScrollMagic.min.js"></script>
+	<script src="js/libs/TweenMax.min.js"></script>
+	<script src="js/libs/debug.addIndicators.min.js"></script>
+	<script src="js/libs/animation.gsap.min.js"></script>
+	<script src="js/libs/popcorn-complete.min.js"></script>
+	<script src="js/ant.js"></script>
+	<script src="js/policing.js"></script>
+	<link rel="stylesheet" href="css/style.css"/>
+</head>
+<body>
+	<div id="fixed">
+		<div class="chart" id="map" data-chart="map" data-map_center_lat="42.330128" data-map_center_lon="-71.067549" data-zoom_level="100000"></div>
+	</div>
+	<a id="zoom_to_chicago" data-control_chart="map" data-zoom_to=".beats > path"></a>
+	<a id="redraw_beats" data-control_chart="map" data-add_layer="beats" data-layer_key="stdin" data-parse="#zoom_to_chicago"></a>
+	<a id="quantify_stops" data-control_chart="map" data-quantify="beats" data-quantifier="stops"></a>
+	<a id="download_stops" data-download="data/stops_by_beat_month_race.csv" data-download_id="stops" data-type="csv" data-download_parse_sequence="#quantify_stops"></a>
+	<a id="download_beats" data-onload data-download="data/beats.json" data-download_id="beats" data-type="json" data-download_parse_sequence="#redraw_beats,#download_stops" data-debug="download_beats"></a>	
+</body>
+</html>
