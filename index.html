@@ -27,31 +27,32 @@
 	</div>
 	<div id="menu">
 	<ul>
-		<li><a data-click data-parse="#white_on_black">White P.O, Black Sub</a></li>
-		<li><a data-click data-parse="#black_on_black">Black P.O, Black Sub</a></li>
-		<li><a data-click data-parse="#hispanic_on_black">Hispanic P.O, Black Sub</a></li>
-		<li><a data-click data-parse="#white_on_hispanic">White P.O, Hispanic Sub</a></li>
-		<li><a data-click data-parse="#black_on_hispanic">Black P.O, Hispanic Sub</a></li>
-		<li><a data-click data-parse="#hispanic_on_hispanic">Hispanic P.O, Hispanic Sub</a></li>
-		<li><a data-click data-parse="#white_on_white">White P.O, White Sub</a></li>
-		<li><a data-click data-parse="#black_on_white">Black P.O, White Sub</a></li>
-		<li><a data-click data-parse="#hispanic_on_white">Hispanic P.O, White Sub</a></li>
-		<li><a data-click data-parse="#quantify_stops">Total</a></li>
+		<li><a class="control white_on_black" data-click data-parse="#white_on_black">White P.O, Black Sub</a></li>
+		<li><a class="control black_on_black" data-click data-parse="#black_on_black">Black P.O, Black Sub</a></li>
+		<li><a class="control hispanic_on_black" data-click data-parse="#hispanic_on_black">Hispanic P.O, Black Sub</a></li>
+		<li><a class="control white_on_hispanic" data-click data-parse="#white_on_hispanic">White P.O, Hispanic Sub</a></li>
+		<li><a class="control black_on_hispanic" data-click data-parse="#black_on_hispanic">Black P.O, Hispanic Sub</a></li>
+		<li><a class="control hispanic_on_hispanic" data-click data-parse="#hispanic_on_hispanic">Hispanic P.O, Hispanic Sub</a></li>
+		<li><a class="control white_on_white" data-click data-parse="#white_on_white">White P.O, White Sub</a></li>
+		<li><a class="control black_on_white" data-click data-parse="#black_on_white">Black P.O, White Sub</a></li>
+		<li><a class="control hispanic_on_white" data-click data-parse="#hispanic_on_white">Hispanic P.O, White Sub</a></li>
+		<li><a class="control total" data-click data-parse="#quantify_stops">Total</a></li>
 	</ul>
 	</div>
 	<!-- controls -->
-	<a id="white_on_black" data-control_chart="map" data-quantify="beats" data-quantifier="stops" data-quantifier_args='{"nests": ["beat", "firstporace"], "nestvalue": {"firstporace": "WHITE"}, "columns": ["black"]}'></a>
-	<a id="black_on_black" data-control_chart="map" data-quantify="beats" data-quantifier="stops" data-quantifier_args='{"nests": ["beat", "firstporace"], "nestvalue": {"firstporace": "BLACK"}, "columns": ["black"]}'></a>
-	<a id="hispanic_on_black" data-control_chart="map" data-quantify="beats" data-quantifier="stops" data-quantifier_args='{"nests": ["beat", "firstporace"], "nestvalue": {"firstporace": "HISPANIC"}, "columns": ["black"]}'></a>
-	<a id="white_on_hispanic" data-control_chart="map" data-quantify="beats" data-quantifier="stops" data-quantifier_args='{"nests": ["beat", "firstporace"], "nestvalue": {"firstporace": "WHITE"}, "columns": ["hispanic"]}'></a>
-	<a id="black_on_hispanic" data-control_chart="map" data-quantify="beats" data-quantifier="stops" data-quantifier_args='{"nests": ["beat", "firstporace"], "nestvalue": {"firstporace": "BLACK"}, "columns": ["hispanic"]}'></a>
-	<a id="hispanic_on_hispanic" data-control_chart="map" data-quantify="beats" data-quantifier="stops" data-quantifier_args='{"nests": ["beat", "firstporace"], "nestvalue": {"firstporace": "HISPANIC"}, "columns": ["hispanic"]}'></a>
-	<a id="white_on_white" data-control_chart="map" data-quantify="beats" data-quantifier="stops" data-quantifier_args='{"nests": ["beat", "firstporace"], "nestvalue": {"firstporace": "WHITE"}, "columns": ["white"]}'></a>
-	<a id="black_on_white" data-control_chart="map" data-quantify="beats" data-quantifier="stops" data-quantifier_args='{"nests": ["beat", "firstporace"], "nestvalue": {"firstporace": "BLACK"}, "columns": ["white"]}'></a>
-	<a id="hispanic_on_white" data-control_chart="map" data-quantify="beats" data-quantifier="stops" data-quantifier_args='{"nests": ["beat", "firstporace"], "nestvalue": {"firstporace": "HISPANIC"}, "columns": ["white"]}'></a>
+	<a id="reset_controls" data-control_element=".control" data-element_remove_class="highlight"></a>
+	<a id="white_on_black" data-control_element=".control.white_on_black" data-element_add_class="highlight" data-parse_first="#reset_controls" data-control_chart="map" data-quantify="beats" data-quantifier="stops" data-quantifier_args='{"nests": ["beat", "firstporace"], "nestvalue": {"firstporace": "WHITE"}, "columns": ["black"]}'></a>
+	<a data-parse_first="#reset_controls" data-control_element=".control.black_on_black" data-element_add_class="highlight" id="black_on_black" data-control_chart="map" data-quantify="beats" data-quantifier="stops" data-quantifier_args='{"nests": ["beat", "firstporace"], "nestvalue": {"firstporace": "BLACK"}, "columns": ["black"]}'></a>
+	<a data-parse_first="#reset_controls" data-control_element=".control.hispanic_on_black" data-element_add_class="highlight" id="hispanic_on_black" data-control_chart="map" data-quantify="beats" data-quantifier="stops" data-quantifier_args='{"nests": ["beat", "firstporace"], "nestvalue": {"firstporace": "HISPANIC"}, "columns": ["black"]}'></a>
+	<a data-parse_first="#reset_controls" data-control_element=".control.white_on_hispanic" data-element_add_class="highlight" id="white_on_hispanic" data-control_chart="map" data-quantify="beats" data-quantifier="stops" data-quantifier_args='{"nests": ["beat", "firstporace"], "nestvalue": {"firstporace": "WHITE"}, "columns": ["hispanic"]}'></a>
+	<a data-parse_first="#reset_controls" data-control_element=".control.black_on_hispanic" data-element_add_class="highlight" id="black_on_hispanic" data-control_chart="map" data-quantify="beats" data-quantifier="stops" data-quantifier_args='{"nests": ["beat", "firstporace"], "nestvalue": {"firstporace": "BLACK"}, "columns": ["hispanic"]}'></a>
+	<a data-parse_first="#reset_controls" data-control_element=".control.hispanic_on_hispanic" data-element_add_class="highlight" id="hispanic_on_hispanic" data-control_chart="map" data-quantify="beats" data-quantifier="stops" data-quantifier_args='{"nests": ["beat", "firstporace"], "nestvalue": {"firstporace": "HISPANIC"}, "columns": ["hispanic"]}'></a>
+	<a data-parse_first="#reset_controls" data-control_element=".control.white_on_white" data-element_add_class="highlight" id="white_on_white" data-control_chart="map" data-quantify="beats" data-quantifier="stops" data-quantifier_args='{"nests": ["beat", "firstporace"], "nestvalue": {"firstporace": "WHITE"}, "columns": ["white"]}'></a>
+	<a data-parse_first="#reset_controls" data-control_element=".control.black_on_white" data-element_add_class="highlight" id="black_on_white" data-control_chart="map" data-quantify="beats" data-quantifier="stops" data-quantifier_args='{"nests": ["beat", "firstporace"], "nestvalue": {"firstporace": "BLACK"}, "columns": ["white"]}'></a>
+	<a data-parse_first="#reset_controls" data-control_element=".control.hispanic_on_white" data-element_add_class="highlight" id="hispanic_on_white" data-control_chart="map" data-quantify="beats" data-quantifier="stops" data-quantifier_args='{"nests": ["beat", "firstporace"], "nestvalue": {"firstporace": "HISPANIC"}, "columns": ["white"]}'></a>
 	<a id="zoom_to_chicago" data-control_chart="map" data-zoom_to=".beats > path"></a>
 	<a id="redraw_beats" data-control_chart="map" data-add_layer="beats" data-layer_key="stdin" data-parse="#zoom_to_chicago"></a>
-	<a id="quantify_stops" data-control_chart="map" data-quantify="beats" data-quantifier="stops"></a>
+	<a id="quantify_stops" data-parse_first="#reset_controls" data-control_element=".control.total" data-element_add_class="highlight" data-control_chart="map" data-quantify="beats" data-quantifier="stops"></a>
 	<a id="download_stops" data-download="data/stops_by_beat_month_race.csv" data-download_id="stops" data-type="csv" data-download_parse_sequence="#quantify_stops"></a>
 	<a id="download_beats" data-onload data-download="data/beats.json" data-download_id="beats" data-type="json" data-download_parse_sequence="#redraw_beats,#download_stops" data-debug="download_beats"></a>	
 </body>
