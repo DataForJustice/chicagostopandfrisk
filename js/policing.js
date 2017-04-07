@@ -4,18 +4,27 @@ $(document).ready (function () {
 			clear: function () { },
 			stops: function (args) { 
 				if (!args) args = {};
+				if (!args.nestvalue) args.nestvalue = {};
 				var nests = args.nests ? args.nests : ["beat"], columns = args.columns ? args.columns : ["total"] ;
 				var vals = [];
 				var cb = function (v, col) { 
 					if (columns.indexOf (col) !== -1) {
-						var va = d3.sum (v);
-						vals.push (va);
-						return va;
+						return d3.sum (v);
 					}
 				}
+				var nest = new Nestify (this.data.stops, nests, columns, cb).data;
+				var extent = nest.extent (function (a) { 
+					for (var i in nests) { 
+						if (args.nestvalue [nests [i]]) {	
+							a = a.values [args.nestvalue [nests [i]]];
+						}
+					}
+					if (!a [columns [0]]) a = a.values;
+					return parseInt (a [columns [0]].value); 
+				});
 				return {
-					nest: new Nestify (this.data.stops, nests, columns, cb).data,
-					scale: d3.scaleQuantize ().domain (d3.extent (vals)).range (["a", "b", "c", "d"])
+					nest: nest,
+					scale: d3.scaleQuantize ().domain (extent).range (["a", "b", "c", "d"])
 				}
 			}
 		},
@@ -25,14 +34,19 @@ $(document).ready (function () {
 					return {"r": 0}
 				},
 				stops: function (beat, args, preq) { 
-					//console.log (preq);
 					if (!args) args = {};
 					var nests = args.nests ? args.nests : ["beat"], columns = args.columns ? args.columns : ["total"] ;
 					var obj = preq.nest;
 					for (var x in nests) {
-						obj = obj [beat.properties [nests [x]]]; 
-					}	
-					return { "class": "m_" + preq.scale (obj [columns [0]].value) };
+						var nestval = null;
+						if (args.nestvalue) {
+							nestval = args.nestvalue [nests [x]];
+						}
+						obj = obj [nestval ? nestval : beat.properties [nests [x]]]; 
+					}
+					if (obj) {
+						return { "class": "m_" + preq.scale (obj [columns [0]].value) };
+					}
 				}
 			}
 		}
