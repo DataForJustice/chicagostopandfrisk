@@ -1801,13 +1801,14 @@ Nestify.prototype = {
 							obj [rollup [d]] = r [i] [rollup [d]];
 						}
 					} else { 
-						if (!obj [rollup [d]]) obj [rollup [d]] = [];
-						for (i in r) {
-							obj [rollup [d]].push (r [i] [rollup [d]]);
+						if (d == rollup.length -1) {
+							if (!obj [rollup [d]]) obj [rollup [d]] = [];
+							for (i in r) {
+								obj [rollup [d]].push (r [i] [rollup [d]]);
+							}
+							obj [rollup [d]] = aggregator (obj [rollup [d]], rollup [d])
+							if (!obj [rollup [d]]) obj [rollup [d]] = r [i] [rollup [d]];
 						}
-						obj [rollup [d]] = aggregator (obj [rollup [d]], rollup [d])
-
-						if (!obj [rollup [d]]) obj [rollup [d]] = r [i] [rollup [d]];
 						/*
 						var cb = function (col, intK) { 
 							return function (a) { if (intK) { return  parseInt (a [intK]); } return parseInt (a [col]); }
