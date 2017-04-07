@@ -25,6 +25,7 @@
 	<div id="fixed">
 		<div class="chart" id="map" data-chart="map" data-map_center_lat="42.330128" data-map_center_lon="-71.067549" data-zoom_level="100000"></div>
 	</div>
+	<div id="menu">
 	<ul>
 		<li><a data-click data-parse="#white_on_black">White P.O, Black Sub</a></li>
 		<li><a data-click data-parse="#black_on_black">Black P.O, Black Sub</a></li>
@@ -37,6 +38,7 @@
 		<li><a data-click data-parse="#hispanic_on_white">Hispanic P.O, White Sub</a></li>
 		<li><a data-click data-parse="#quantify_stops">Total</a></li>
 	</ul>
+	</div>
 	<!-- controls -->
 	<a id="white_on_black" data-control_chart="map" data-quantify="beats" data-quantifier="stops" data-quantifier_args='{"nests": ["beat", "firstporace"], "nestvalue": {"firstporace": "WHITE"}, "columns": ["black"]}'></a>
 	<a id="black_on_black" data-control_chart="map" data-quantify="beats" data-quantifier="stops" data-quantifier_args='{"nests": ["beat", "firstporace"], "nestvalue": {"firstporace": "BLACK"}, "columns": ["black"]}'></a>
