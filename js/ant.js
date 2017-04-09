@@ -150,13 +150,21 @@ Ant.prototype = {
 		/* 
 		* Lets see what we have here: data? should we quantify something?
 		*/
-		var data;
-		if (typeof element === 'string' || element.tagName) { // this is a string or an HTMLElement (check compatibility with other browsers)
-			var id = $(element).attr ("id");
-			data = $(element).data ();
-		} else { 
-			id = element.id;
+		if (typeof element === 'string') { // this is a string or an HTMLElement (check compatibility with other browsers)
+			element = $(element) [0];
+		}
+		var id = element.id, data = {};
+		if (element === Object (element)) {
 			data = element;
+		}
+		// Let's convert things to JSON
+		for (var k in element.dataset) {
+			try {
+				var j = JSON.parse (element.dataset [k]);
+				if (j) {
+					data [k] = j;
+				} 
+			} catch (e) { data [k] = element.dataset [k]; }
 		}
 		/*
 		* Parse_first
@@ -1400,6 +1408,7 @@ ant.charts.map = function (container, width, height) {
 			this.callbacks [ev] = [];
 		}
 		if (!scope) { scope = this; }
+		this.callbacks [ev] = []; // HACK, FIXME!  
 		this.callbacks [ev].push ({ scope: scope, callback: cb});	
 	}
 	this.removeCallback = function (ev, cb) {
@@ -1469,22 +1478,28 @@ ant.charts.map.topology = function (map,name, t, f) {
 				.each (function (d) { qn (d3.select (this), d, plot); })
 				.attr ("id", setId)
 				.attr ("d", function (x) { return path (x); })
-				.enter ()
-				.append ("path")
 				.on ("click", this.createCallback ("click"))
 				.on ("mouseover", this.createCallback ("mouseover"))
 				.on ("mouseout", this.createCallback ("mouseout"))
+				.enter ()
+					.append ("path")
+				//	.on ("click", this.createCallback ("click"))
+				//	.on ("mouseover", this.createCallback ("mouseover"))
+				//	.on ("mouseout", this.createCallback ("mouseout"))
 		}
 		if (plot == "points") {
 			this.parentMap.svg.select ("g." + this.name).selectAll ("circle")
 				.data (topojson.feature (this.topology, this.features).features)
 				.each (function (d) { qn (d3.select (this), d, plot); }) 
 				.attr ("id", setId)
-				.enter ()
-				.append ("circle")
 				.on ("click", this.createCallback ("click"))
 				.on ("mouseover", this.createCallback ("mouseover"))
 				.on ("mouseout", this.createCallback ("mouseout"))
+				.enter ()
+					.append ("circle")
+					.on ("click", this.createCallback ("click"))
+					.on ("mouseover", this.createCallback ("mouseover"))
+					.on ("mouseout", this.createCallback ("mouseout"))
 		}
 	}
 	this.createCallback = function (type) {
@@ -1504,6 +1519,7 @@ ant.charts.map.topology = function (map,name, t, f) {
 			this.callbacks [ev] = [];
 		}
 		if (!scope) { scope = this; }
+		this.callbacks [ev] = []; // HACK! FIXME
 		this.callbacks [ev].push ({ scope: scope, callback: cb});	
 	}
 	this.removeCallback = function (ev, cb) {
@@ -1796,19 +1812,16 @@ Nestify.prototype = {
 			function (r) { 
 				var obj = {}; 
 				for (d in rollup) { 
+					if (!obj [rollup [d]]) obj [rollup [d]] = [];
+					for (i in r) {
+						obj [rollup [d]].push (r [i] [rollup [d]]);
+					}
 					if (!aggregator) { 
-						for (i in r) { 
-							obj [rollup [d]] = r [i] [rollup [d]];
-						}
+						obj [rollup [d]] = d3.sum (obj [rollup [d]]);
 					} else { 
-						if (d == rollup.length -1) {
-							if (!obj [rollup [d]]) obj [rollup [d]] = [];
-							for (i in r) {
-								obj [rollup [d]].push (r [i] [rollup [d]]);
-							}
-							obj [rollup [d]] = aggregator (obj [rollup [d]], rollup [d])
-							if (!obj [rollup [d]]) obj [rollup [d]] = r [i] [rollup [d]];
-						}
+						obj [rollup [d]] = aggregator (obj [rollup [d]], rollup [d])
+					}
+					if (!obj [rollup [d]]) obj [rollup [d]] = r [i] [rollup [d]];
 						/*
 						var cb = function (col, intK) { 
 							return function (a) { if (intK) { return  parseInt (a [intK]); } return parseInt (a [col]); }
@@ -1819,7 +1832,6 @@ Nestify.prototype = {
 							obj [rollup [d]] = aggregator (r, cb (rollup [d], interiorKey));
 						}
 						*/
-					}
 
 				} 
 				return obj; 
