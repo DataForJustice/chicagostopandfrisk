@@ -11,6 +11,23 @@ h1, h2, h3, h4, h5, h6 {
 .control.highlight {
 	color: red;
 }
+table, th, td {
+	font-size: 0.7em;
+	text-align: left;
+	font-weight: normal;
+}
+ul li:before {
+	content: "\00BB";
+}
+ul {
+	display: inline;
+	width: 45%;
+	float: left;
+	margin: 0;
+	padding: 0;
+	list-style-type: none;
+	font-size: 0.9em;
+}
 @media all and (orientation: portrait) {
 	#fixed {
 		position: fixed;
@@ -25,6 +42,10 @@ h1, h2, h3, h4, h5, h6 {
 		left: 0;
 		width: 100%;
 		height: 50%;
+	}
+	#legend {
+		height: 40%;
+		width: 100%;
 	}
 }
 @media all and (orientation: landscape) {
@@ -42,6 +63,11 @@ h1, h2, h3, h4, h5, h6 {
 		width: 50%;
 		height: 100%;
 	}
+	#legend {
+		position: absolute;
+		top: 50%;
+		height: 50%;
+	}
 }
 #map {
 	width: 100%;
@@ -54,6 +80,10 @@ h1, h2, h3, h4, h5, h6 {
 .beats > path {
 	fill: none;
 	stroke: lightgray;
+}
+.beats > path.selected {
+	stroke: blue !important;
+	stroke-width: 3px;
 }
 .beats.default > path {
 	fill: rgba(0,84,136,0.3);
