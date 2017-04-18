@@ -2,13 +2,17 @@ html,body {
 	width: 100%;
 	height: 100%;
 	background-color: rgb(248,248,248);
-	color: rgb(0, 84, 136);
+	color: gray;
+	font-family: Helvetica;
 }
 h1, h2, h3, h4, h5, h6 {
 	margin: 0;
 	padding: 0;
 }
 .control.highlight {
+	color: red;
+}
+.race_control.highlight {
 	color: red;
 }
 table, th, td {
@@ -77,9 +81,13 @@ ul {
 	width: 100%;
 	height: 100%;
 }
+.blockgroups > path {
+	stroke: none;
+}
 .beats > path {
 	fill: none;
-	stroke: lightgray;
+	fill-opacity: 0.6 !important;
+	stroke: none;
 }
 .beats > path.selected {
 	stroke: blue !important;
@@ -89,6 +97,11 @@ ul {
 	fill: rgba(0,84,136,0.3);
 	stroke: white;
 }
+path.r_a { fill: #f7f7f7; }
+path.r_b { fill: #cccccc; }
+path.r_c { fill: #969696; }
+path.r_d { fill: #525252; }
+
 path.m_a { fill: #fee5d9; }
 path.m_b { fill: #fcae91; }
 path.m_c { fill: #fb6a4a; }
