@@ -27,7 +27,7 @@ $(document).ready (function () {
 				}
 			},
 			"race": function (a) {
-				return {scale: d3.scaleQuantize ().domain ([100, 0]).range (["a", "b", "c", "d"])}
+				return {scale: d3.scaleQuantize ().domain ([0, 100]).range (["a", "b", "c", "d"])}
 			}
 		},
 		quantifiers: {
