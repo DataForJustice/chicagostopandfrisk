@@ -25,10 +25,18 @@ $(document).ready (function () {
 					nest: nest,
 					scale: d3.scaleQuantize ().domain (extent).range (["a", "b", "c", "d"])
 				}
+			},
+			"race": function (a) {
+				return {scale: d3.scaleQuantize ().domain ([100, 0]).range (["a", "b", "c", "d"])}
 			}
 		},
 		quantifiers: {
 			maps: {
+				race: function (a, col, d) {
+					var s = (a.properties [col] / a.properties.total) * 100;
+					
+					return {"class": "blockgroup r_" + d.scale (s)}
+				},
 				clear: function () { 
 					return {"r": 0}
 				},
